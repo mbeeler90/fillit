@@ -6,7 +6,7 @@
 /*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 14:43:19 by mbeeler           #+#    #+#             */
-/*   Updated: 2022/01/14 23:10:07 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/01/15 00:21:17 by manuelbeele      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,42 +31,19 @@ static int	place_element(t_list *head, int sqr, char **result)
 	int	i;
 	int	loc;
 
-	//printf("char: %s\n", *result);
-	//printf("cur_pos: %d\n", head->cur_pos);
-	//printf("combined: %c\n", *(*result + head->cur_pos));
-	if (*(*result + head->cur_pos) != O_CHAR)
+	i = -1;
+	while (++i < 4)
 	{
-		//printf("should be none\n");
-		return (0);
-	}
-	else if (head->cur_pos / sqr + head->y[2] >= sqr)
-	{
-		//printf("exceeds vertically\n");
-		return (0);
-	}
-	else if (head->cur_pos % sqr + head->x[2] >= sqr)
-	{
-		//printf("exceeds horicontally");
-		return (0);
-	}
-	else
-	{
-	//	printf("result in else: %s\n", *result);
-		i = -1;
-		*(*result + head->cur_pos) = head->symbol;
-		while (++i < 3)
+		loc = head->cur_pos + head->x[i] + head->y[i] * sqr;
+		if (*(*result + loc) == O_CHAR && head->cur_pos % sqr + head->x[i] < sqr && head->cur_pos / sqr + head->y[i] < sqr)
+			*(*result + loc) = head->symbol;
+		else
 		{
-			loc = head->cur_pos + head->x[i] + head->y[i] * sqr;
-			if (*(*result + loc) == O_CHAR)
-				*(*result + loc) = head->symbol;
-			else
-			{
-				clear_result(result, head->symbol);
-				return (0);
-			}
+			clear_result(result, head->symbol);
+			return (0);
 		}
-		return (1);
 	}
+	return (1);
 }
 
 static int	solve(t_list *head, char **result, int sqr)
@@ -77,7 +54,7 @@ static int	solve(t_list *head, char **result, int sqr)
 	{
 		solution = 1;
 	//	printf("%d -> #solution\n", solution);
-		while (head->cur_pos < sqr * sqr && place_element(head, sqr, result) == 0)
+		while (head->cur_pos < sqr * sqr && !place_element(head, sqr, result))
 		{
 	//		printf("new head, cur_head: %d\n", head->cur_pos);
 			head->cur_pos++;

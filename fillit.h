@@ -6,7 +6,7 @@
 /*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:54:28 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/01/14 21:42:50 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/01/14 23:33:12 by manuelbeele      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ typedef struct s_list
 	struct s_list	*prev;
 	char			symbol;
 	int				cur_pos;
-	int				x[3];
-	int				y[3];
+	int				x[4];
+	int				y[4];
 }					t_list;
 
 char	*solver(t_list *head);
