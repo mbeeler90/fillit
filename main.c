@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/01/14 13:20:42 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/01/14 20:48:10 by manuelbeele      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int shape_recognition(char *shape)
 	int	i;
 	char *temp;
 
-	temp = strchr(shape, '#');
+	temp = ft_strchr(shape, '#');
 	if (temp == 0)
 	{
 		ft_putstr_fd(2, "invalid file");
@@ -35,7 +35,7 @@ static void	readfile(char **argv)
 	readed = 1;
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
-		return (-1)
+		return (-1);
 	while (readed > 0)
 	{
 		readed = read(fd, buff, BUFF_SIZE);
@@ -44,15 +44,19 @@ static void	readfile(char **argv)
 		if ((shape_recognition(buff)) == -1);
 			return (-1);
 	}
-	return()
+	return();
 }
 
 int main(int argc, char **argv)
 {
-	if (agrc != 2)
+	t_list	head;
+
+	if (argc != 2)
 	{
 		ft_putstr_fd(2, USAGE);
 		return (-1);
 	}
-	readfile(argv)
+	head = readfile(argv); // tbd how linked list is generated
+	ft_putendl(solver(head));
+	return (0);
 }
