@@ -6,12 +6,11 @@
 /*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 14:43:19 by mbeeler           #+#    #+#             */
-/*   Updated: 2022/01/15 00:21:17 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/01/15 10:20:30 by manuelbeele      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdio.h> //
 
 static void	clear_result(char **result, char clear)
 {
@@ -32,10 +31,11 @@ static int	place_element(t_list *head, int sqr, char **result)
 	int	loc;
 
 	i = -1;
-	while (++i < 4)
+	while (++i < EL_SIZE)
 	{
 		loc = head->cur_pos + head->x[i] + head->y[i] * sqr;
-		if (*(*result + loc) == O_CHAR && head->cur_pos % sqr + head->x[i] < sqr && head->cur_pos / sqr + head->y[i] < sqr)
+		if (*(*result + loc) == O_CHAR && head->cur_pos % sqr + head->x[i] \
+			< sqr && head->cur_pos / sqr + head->y[i] < sqr)
 			*(*result + loc) = head->symbol;
 		else
 		{
@@ -53,15 +53,10 @@ static int	solve(t_list *head, char **result, int sqr)
 	while (head)
 	{
 		solution = 1;
-	//	printf("%d -> #solution\n", solution);
 		while (head->cur_pos < sqr * sqr && !place_element(head, sqr, result))
-		{
-	//		printf("new head, cur_head: %d\n", head->cur_pos);
 			head->cur_pos++;
-		}
 		if (head->cur_pos == sqr * sqr)
 		{
-	//		printf("no valid solution found\n");
 			head->cur_pos = 0;
 			head = head->prev;
 			if (head)
@@ -74,16 +69,17 @@ static int	solve(t_list *head, char **result, int sqr)
 		else
 			head = head->next;
 	}
-//	printf("%d -> solution\n", solution);
 	return (solution);
 }
 
-char	*solver(t_list *head)
+char	*solver(t_list *head, int min_size)
 {
 	char	*result;
 	int		sqr;
 
 	sqr = 2;
+	while (sqr * sqr < min_size)
+		sqr++;
 	result = ft_strnew(sqr * sqr);
 	result = ft_memset(result, O_CHAR, sqr * sqr);
 	while (solve(head, &result, sqr) == 0)
@@ -92,8 +88,6 @@ char	*solver(t_list *head)
 		sqr++;
 		result = ft_strnew(sqr * sqr);
 		result = ft_memset(result, O_CHAR, sqr * sqr);
-	//	printf("result:\n%s\n", result);
 	}
-	//ft_lstdel(&head);
 	return (result);
 }

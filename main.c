@@ -6,69 +6,34 @@
 /*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/01/15 00:35:40 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/01/15 10:30:00 by manuelbeele      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-/*
-int shape_recognition(char *shape)
-{
-	int	i;
-	char *temp;
-
-	temp = ft_strchr(shape, '#');
-	if (temp == 0)
-	{
-		ft_putstr_fd(2, "invalid file");
-		return (-1);
-	}
-	
-	
-}
-
-static void	readfile(char **argv)
-{
-	int		fd;
-	int		readed;
-	char	buff[BUFF_SIZE + 1];
-
-	readed = 1;
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 0)
-		return (-1);
-	while (readed > 0)
-	{
-		readed = read(fd, buff, BUFF_SIZE);
-		if (readed < 0)
-			return (-1);
-		if ((shape_recognition(buff)) == -1);
-			return (-1);
-	}
-	return();
-}
-*/
-
 int main(int argc, char **argv)
 {
 	t_list	*head;
-	t_list	*head2;
+/*	t_list	*head2;
 	t_list	*head3;
 	t_list	*head4;
 	t_list	*head5;
 	t_list	*head6;
 	t_list	*head7;
-	t_list	*head8;
+	t_list	*head8; */
 	char	*result;
+	int		lstlen;
 
-/*	if (argc != 2)
+	if (argc != 2)
 	{
 		ft_putstr_fd(2, USAGE);
 		return (-1);
 	}
-	head = readfile(argv); // tbd how linked list is generated
-	*/
+	lstlen = 0;
+	head = read_file(argv, &lstlen); // tbd how linked list is generated
+
+/*
 	argc = 0;
 	argv = NULL;
 	head = (t_list *)malloc(sizeof(t_list));
@@ -175,8 +140,10 @@ int main(int argc, char **argv)
 	head8->y[1] = 1;
 	head8->y[2] = 2;
 	head8->y[3] = 2;
-	result = solver(head);
+*/
+	result = solver(head, (lstlen + 1) * EL_SIZE);
 	print_result(result);
+//	system("leaks fillit");
 	return (0);
 }
 
