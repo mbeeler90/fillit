@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbeeler <mbeeler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/01/17 09:59:08 by mbeeler          ###   ########.fr       */
+/*   Updated: 2022/01/18 18:31:48 by manuelbeele      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		ft_putstr_fd(2, "USAGE");
+//		ft_putstr_fd(2, "USAGE");
 		return (-1);
 	}
 	lstlen = 0;
@@ -141,10 +141,10 @@ int main(int argc, char **argv)
 	head8->y[2] = 2;
 	head8->y[3] = 2;
 */
-	result = solver(head, (lstlen + 1) * EL_SIZE);
+	result = solver(head, lstlen * EL_SIZE);
 	print_result(result);
 //	system("leaks fillit");
 	return (0);
 }
 
-//run: gcc -Wall -Werror -Wextra -I. main.c solver.c print_result.c -L libft/ -lft 
+//run: gcc -Wall -Werror -Wextra -I. main.c solver.c print_result.c read_file.c structure_functions.c  -L libft/ -lft 

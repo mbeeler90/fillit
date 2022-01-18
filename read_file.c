@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbeeler <mbeeler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/01/17 13:04:27 by mbeeler          ###   ########.fr       */
+/*   Updated: 2022/01/18 18:06:18 by manuelbeele      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,25 +91,25 @@ t_list	*read_file(char **argv, int *lstlen)
 {
 	int		fd;
 	int		f_read;
-	int		*position[4];
+	int		position[4];
 	char	buff[BUFF_SIZE + 1];
 	t_list	*head;
 
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0 || read(fd, buff, 0) == -1)
-		return (-1);
+		return (NULL);
 	f_read = 1;
 	head = NULL;
 	while (f_read > 0)
 	{
 		f_read = read(fd, buff, BUFF_SIZE);
 		buff[f_read] = '\0';
-		if (!validate_lines(buff, &position) || !validate_shape(position))
+		if (!validate_lines(buff, &position) || !validate_shape(position) || \
+			!create_structure(&head, position, lstlen))
 		{
 			delete_structure(&head);
 			return (NULL);
 		}
-		create_structure(&head, position);
 	}
 	return(head);
 }
