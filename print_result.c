@@ -6,7 +6,7 @@
 /*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 14:43:19 by mbeeler           #+#    #+#             */
-/*   Updated: 2022/01/14 21:48:35 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/01/18 22:42:31 by manuelbeele      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	print_result(char *result)
 {
 	int	sqr;
-	int len;
+	int	len;
 	int	i;
 
 	len = ft_strlen(result);

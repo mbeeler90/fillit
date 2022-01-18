@@ -6,7 +6,7 @@
 /*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:54:28 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/01/18 18:24:26 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/01/18 22:46:42 by manuelbeele      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define O_CHAR '.'
 # define START_C 'A'
 # define EL_SIZE 4
-# define BUFF_SIZE EL_SIZE * (EL_SIZE + 1) + 1
+# define BUFF_SIZE 21
 
 typedef struct s_list
 {

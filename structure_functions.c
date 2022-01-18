@@ -6,7 +6,7 @@
 /*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 14:43:19 by mbeeler           #+#    #+#             */
-/*   Updated: 2022/01/18 18:48:25 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/01/18 22:41:12 by manuelbeele      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	delete_structure(t_list **head)
 	}
 }
 
-static void	get_arrays(int *position, int **x_array, int **y_array)
+static void	get_arrays(int *position, int *coord_ptr)
 {
 	int	i;
 	int	min_x;
@@ -46,18 +46,18 @@ static void	get_arrays(int *position, int **x_array, int **y_array)
 	min_y = EL_SIZE;
 	while (++i < EL_SIZE)
 	{
-		*x_array[i] = position[i] / (EL_SIZE + 1);
-		*y_array[i] = position[i] % (EL_SIZE + 1);
-		if (*x_array[i] < min_x)
-			min_x = *x_array[i];
-		if (*y_array[i < min_y])
-			min_y = *y_array[i];
+		*(coord_ptr + i + EL_SIZE) = position[i] / (EL_SIZE + 1);
+		*(coord_ptr + i) = position[i] % (EL_SIZE + 1);
+		if (*(coord_ptr + i) < min_x)
+			min_x = *(coord_ptr + i);
+		if (*(coord_ptr + i + EL_SIZE) < min_y)
+			min_y = *(coord_ptr + i + EL_SIZE);
 	}
 	i = -1;
 	while (++i < EL_SIZE)
 	{
-		*x_array[i] -= min_x;
-		*y_array[i] -= min_y;
+		*(coord_ptr + i) -= min_x;
+		*(coord_ptr + i + EL_SIZE) -= min_y;
 	}
 }
 
@@ -65,10 +65,11 @@ static t_list	*create_element(int *position, int *lstlen)
 {
 	t_list	*elem;
 	int		i;
-	int		x_array[EL_SIZE];
-	int		y_array[EL_SIZE];
+	int		coord_array[2 * EL_SIZE];
+	int		*coord_ptr;
 
 	i = -1;
+	coord_ptr = coord_array;
 	elem = (t_list *)malloc(sizeof(t_list));
 	if (!elem)
 		return (NULL);
@@ -76,11 +77,11 @@ static t_list	*create_element(int *position, int *lstlen)
 	elem->prev = NULL;
 	elem->symbol = START_C + *lstlen;
 	elem->cur_pos = 0;
-	get_arrays(position, &x_array, &y_array);
+	get_arrays(position, coord_ptr);
 	while (++i < EL_SIZE)
 	{
-		elem->x[i] = x_array[i];
-		elem->y[i] = y_array[i];
+		elem->x[i] = coord_array[i];
+		elem->y[i] = coord_array[i + EL_SIZE];
 	}
 	*lstlen += 1;
 	return (elem);
