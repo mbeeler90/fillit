@@ -6,7 +6,7 @@
 #    By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/29 13:01:51 by jjuntune          #+#    #+#              #
-#    Updated: 2022/01/10 13:24:46 by jjuntune         ###   ########.fr        #
+#    Updated: 2022/01/19 14:57:36 by jjuntune         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,6 @@ OFILES += ft_strmapi.o ft_strjoin.o ft_strtrim.o ft_strsplit.o ft_wordcount.o
 OFILES += ft_memdel.o ft_strsub.o ft_strequ.o ft_strnequ.o ft_itoa.o
 OFILES += ft_arrdel.o ft_numlen.o ft_isupper.o ft_islower.o ft_isthere.o
 OFILES += ft_strmove.o
-
 all: $(NAME) 
 
 $(NAME): $(OFILES) 
