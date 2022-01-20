@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/01/19 14:22:19 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/01/20 15:43:59 by manuelbeele      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,16 @@ static int	validate_lines(char *buff, int *pst_ptr)
 	count = 0;
 	while (++i < BUFF_SIZE)
 	{
-		if (i == 20 && buff[i] != '\n' && buff[i] != '\0')
+		if (i == (BUFF_SIZE - 1) && buff[i] != '\n' && buff[i] != '\0')
 			return (0);
 		if (i % (EL_SIZE + 1) == EL_SIZE && buff[i] != '\n')
 			return (0);
-		if (i != 20 && i % (EL_SIZE + 1) != EL_SIZE)
+		if (i != (BUFF_SIZE - 1) && i % (EL_SIZE + 1) != EL_SIZE)
 		{
 			if (buff[i] != S_CHAR && buff[i] != O_CHAR)
 				return (0);
-			else if (buff[i] == S_CHAR)
-			{
-				*(pst_ptr + count) = i;
-				count++;
-			}
+			else if (buff[i] == S_CHAR && ++count <= EL_SIZE)
+				*(pst_ptr + count - 1) = i;
 		}
 	}
 	if (count != 4)
@@ -65,7 +62,7 @@ static int	validate_shape(int *position)
 {
 	int	i;
 	int	j;
-	int	count[4];
+	int	count[EL_SIZE];
 
 	i = -1;
 	while (++i < EL_SIZE)
@@ -87,10 +84,9 @@ static int	validate_shape(int *position)
 	return (check_count(count));
 }
 
-t_list	*read_file(char **argv, int *lstlen)
+t_list	*read_file(char **argv, int *lstlen, int end_of_file, int fd)
 {
-	int		fd;
-	int		f_read;
+	int		ret;
 	int		position[EL_SIZE];
 	int		*pst_ptr;
 	char	buff[BUFF_SIZE + 1];
@@ -99,19 +95,20 @@ t_list	*read_file(char **argv, int *lstlen)
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0 || read(fd, buff, 0) == -1)
 		return (NULL);
-	f_read = read(fd, buff, BUFF_SIZE);
+	ret = read(fd, buff, BUFF_SIZE);
 	head = NULL;
 	pst_ptr = position;
-	while (f_read > 0)
+	while (ret > 0 || end_of_file == BUFF_SIZE)
 	{
-		buff[f_read] = '\0';
+		buff[ret] = '\0';
 		if (!validate_lines(buff, pst_ptr) || !validate_shape(position) || \
 			!create_structure(&head, position, lstlen))
 		{
 			delete_structure(&head);
 			return (NULL);
 		}
-		f_read = read(fd, buff, BUFF_SIZE);
+		end_of_file = ret;
+		ret = read(fd, buff, BUFF_SIZE);
 	}
 	return (head);
 }

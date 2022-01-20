@@ -1,0 +1,10 @@
+echo "Le Algorithm:"
+../fillit test8
+
+echo ""
+echo "Le Speed"
+time ../fillit test1.prm
+
+echo ""
+echo ""
+time ../fillit test7.prm

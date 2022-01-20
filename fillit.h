@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:54:28 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/01/19 14:38:49 by jjuntune         ###   ########.fr       */
+/*   Updated: 2022/01/20 15:25:52 by manuelbeele      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_list
 	int				y[EL_SIZE];
 }					t_list;
 
-t_list	*read_file(char **argv, int *lstlen);
+t_list	*read_file(char **argv, int *lstlen, int end_of_file, int fd);
 char	*solver(t_list *head, int min_size);
 void	print_result(char *result);
 int		create_structure(t_list **head, int *position, int *lstlen);

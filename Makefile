@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+         #
+#    By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/17 15:54:37 by jjuntune          #+#    #+#              #
-#    Updated: 2022/01/19 14:39:08 by jjuntune         ###   ########.fr        #
+#    Updated: 2022/01/20 14:15:47 by manuelbeele      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,11 +23,18 @@ FLAGS = -Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME): $(OFILES)
+	make -C libft/
 	gcc $(FLAGS) -o $(NAME) $(OFILES) $(LIBRERY)
+
 %.o:%.c
 	gcc $(FLAGS) -c $(FILES) $<
+
 clean:
 	rm -f $(OFILES)
+	make -C libft/ clean
+	
 fclean: clean
 	rm -rf $(NAME)
+	make -C libft/ fclean
+
 re: fclean all

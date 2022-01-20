@@ -1,0 +1,27 @@
+echo "Additional tests:"
+echo "Invalid Files:"
+../fillit test9_invalid
+../fillit test10_invalid
+../fillit test11_invalid
+../fillit test12_invalid
+../fillit test14_invalid
+../fillit test16_invalid
+../fillit test18_invalid
+../fillit test19_invalid
+
+echo ""
+echo "Valid Files:"
+../fillit test13 > test13_result_fc
+diff ./test13_result ./test13_result_fc
+cat test13_result_fc
+rm test13_result_fc
+echo ""
+../fillit test15 > test15_result_fc
+diff test15_result test15_result_fc
+cat test15_result_fc
+rm test15_result_fc
+echo ""
+../fillit test17 > test17_result_fc
+diff test17_result test17_result_fc
+cat test17_result_fc
+rm test17_result_fc

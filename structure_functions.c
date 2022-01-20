@@ -6,7 +6,7 @@
 /*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 14:43:19 by mbeeler           #+#    #+#             */
-/*   Updated: 2022/01/18 22:41:12 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/01/20 13:22:45 by manuelbeele      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	delete_structure(t_list **head)
 			tmp->y[i] = 0;
 		}
 		free(tmp);
+		tmp = NULL;
 	}
 }
 

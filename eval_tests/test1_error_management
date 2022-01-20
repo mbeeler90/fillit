@@ -1,0 +1,17 @@
+echo "Args Management:"
+../fillit
+../fillit test0 test1
+
+echo ""
+echo "Invalid Pieces:"
+../fillit test0
+../fillit test1
+../fillit test2
+../fillit test3
+../fillit test4
+
+echo ""
+echo "Invalid File:"
+../fillit test5
+../fillit test6
+../fillit test7
