@@ -25,3 +25,8 @@ echo ""
 diff test17_result test17_result_fc
 cat test17_result_fc
 rm test17_result_fc
+echo ""
+../fillit test20 > test20_result_fc
+diff test20_result test20_result_fc
+cat test20_result_fc
+rm test20_result_fc

@@ -1,1 +1,3 @@
-print error to stdout or stderr?
+print error to stdout or stderr? -> must display error on std out according to excersise (p10)
+should we delete the eval_tests folder when we push the solution?
+Add a close statement to close the file?
