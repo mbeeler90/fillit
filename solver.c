@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   solver.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
+/*   By: jjuntune <jjuntune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 14:43:19 by mbeeler           #+#    #+#             */
-/*   Updated: 2022/01/20 13:09:55 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/01/21 15:20:02 by jjuntune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@ static int	place_element(t_list *head, int sqr, char **result)
 	i = -1;
 	while (++i < EL_SIZE)
 	{
-		loc = head->cur_pos + head->x[i] + head->y[i] * sqr;
-		if (*(*result + loc) == O_CHAR && head->cur_pos % sqr + head->x[i] \
-			< sqr && head->cur_pos / sqr + head->y[i] < sqr)
+		loc = head->cur_pos + head->x[i] + (head->y[i] * sqr);
+		if (head->cur_pos % sqr + head->x[i] < sqr 
+			&& head->cur_pos / sqr + head->y[i] < sqr
+			&& *(*result + loc) == O_CHAR)
 			*(*result + loc) = head->symbol;
 		else
 		{
