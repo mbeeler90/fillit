@@ -6,7 +6,7 @@
 /*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 14:43:19 by mbeeler           #+#    #+#             */
-/*   Updated: 2022/01/20 13:22:45 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/01/23 19:36:21 by manuelbeele      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,39 +26,66 @@ void	delete_structure(t_list **head)
 		tmp->prev = NULL;
 		tmp->symbol = 0;
 		tmp->cur_pos = 0;
+		tmp->code = 0;
+		tmp->x = 0;
+		tmp->y = 0;
 		while (++i < EL_SIZE)
-		{
-			tmp->x[i] = 0;
-			tmp->y[i] = 0;
-		}
+			tmp->position[i] = 0;
 		free(tmp);
 		tmp = NULL;
 	}
 }
 
-static void	get_arrays(int *position, int *coord_ptr)
+static void	get_heigth_and_width(t_list *elem, int *position)
 {
-	int	i;
 	int	min_x;
 	int	min_y;
+	int	i;
 
 	i = -1;
-	min_x = EL_SIZE;
-	min_y = EL_SIZE;
+	min_x = *position % (EL_SIZE + 1);
+	min_y = *position / (EL_SIZE + 1);
 	while (++i < EL_SIZE)
 	{
-		*(coord_ptr + i + EL_SIZE) = position[i] / (EL_SIZE + 1);
-		*(coord_ptr + i) = position[i] % (EL_SIZE + 1);
-		if (*(coord_ptr + i) < min_x)
-			min_x = *(coord_ptr + i);
-		if (*(coord_ptr + i + EL_SIZE) < min_y)
-			min_y = *(coord_ptr + i + EL_SIZE);
+		if (*(position + i) % (EL_SIZE + 1) < min_x)
+			min_x = *(position + i) % (EL_SIZE + 1);
 	}
 	i = -1;
+	elem->height = 0;
+	elem->width = 0;
 	while (++i < EL_SIZE)
 	{
-		*(coord_ptr + i) -= min_x;
-		*(coord_ptr + i + EL_SIZE) -= min_y;
+		*(position + i) -= (EL_SIZE + 1) * min_y + min_x;
+		if (*(position + i) / (EL_SIZE + 1) > elem->height)
+			elem->height = *(position + i) / (EL_SIZE + 1);
+		if (*(position + i) % (EL_SIZE + 1) > elem->width)
+			elem->width = *(position + i) % (EL_SIZE + 1);
+	}
+}
+
+static void	get_code(t_list *elem, int *position)
+{
+	int						i;
+	unsigned long long int	sum;
+
+	i = -1;
+	while (++i < EL_SIZE)
+		*(position + i) += 15 - 2 * (*(position + i) % (EL_SIZE + 1))
+			+ 11 * (*(position + i) / (EL_SIZE + 1));
+	sum = 1;
+	i = -1;
+	elem->code = 0;
+	while (++i < 64)
+	{
+		if (i == *(position))
+			elem->code += sum;
+		else if (i == *(position + 1))
+			elem->code += sum;
+		else if (i == *(position + 2))
+			elem->code += sum;
+		else if (i == *(position + 3))
+			elem->code += sum;
+		sum *= 2;
 	}
 }
 
@@ -66,11 +93,8 @@ static t_list	*create_element(int *position, int *lstlen)
 {
 	t_list	*elem;
 	int		i;
-	int		coord_array[2 * EL_SIZE];
-	int		*coord_ptr;
 
 	i = -1;
-	coord_ptr = coord_array;
 	elem = (t_list *)malloc(sizeof(t_list));
 	if (!elem)
 		return (NULL);
@@ -78,12 +102,13 @@ static t_list	*create_element(int *position, int *lstlen)
 	elem->prev = NULL;
 	elem->symbol = START_C + *lstlen;
 	elem->cur_pos = 0;
-	get_arrays(position, coord_ptr);
+	elem->x = 0;
+	elem->y = 0;
+	get_heigth_and_width(elem, position);
 	while (++i < EL_SIZE)
-	{
-		elem->x[i] = coord_array[i];
-		elem->y[i] = coord_array[i + EL_SIZE];
-	}
+		elem->position[i] = position[i];
+	get_code(elem, position);
+	i = -1;
 	*lstlen += 1;
 	return (elem);
 }

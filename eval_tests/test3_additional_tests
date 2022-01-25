@@ -30,3 +30,5 @@ echo ""
 diff test20_result test20_result_fc
 cat test20_result_fc
 rm test20_result_fc
+echo ""
+time ../fillit max.txt

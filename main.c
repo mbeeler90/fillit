@@ -6,7 +6,7 @@
 /*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/01/20 15:54:24 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/01/23 19:33:36 by manuelbeele      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	main(int argc, char **argv)
 {
-	t_list	*head;
-	char	*result;
-	int		lstlen;
-	int		end_of_file;
-	int		fd;
+	t_list		*head;
+	int			lstlen;
+	int			end_of_file;
+	int			fd;
+	int			sqr;
 
 	if (argc != 2)
 	{
@@ -34,8 +34,8 @@ int	main(int argc, char **argv)
 		ft_putstr_fd("error\n", 1);
 		return (1);
 	}
-	result = solver(head, lstlen * EL_SIZE);
-	print_result(result);
+	sqr = solver(head, lstlen * EL_SIZE);
+	print_result(head, sqr);
 	delete_structure(&head);
 	return (0);
 }

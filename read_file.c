@@ -6,7 +6,7 @@
 /*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/01/20 15:43:59 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/01/22 15:42:47 by manuelbeele      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ t_list	*read_file(char **argv, int *lstlen, int end_of_file, int fd)
 {
 	int		ret;
 	int		position[EL_SIZE];
-	int		*pst_ptr;
 	char	buff[BUFF_SIZE + 1];
 	t_list	*head;
 
@@ -97,12 +96,11 @@ t_list	*read_file(char **argv, int *lstlen, int end_of_file, int fd)
 		return (NULL);
 	ret = read(fd, buff, BUFF_SIZE);
 	head = NULL;
-	pst_ptr = position;
 	while (ret > 0 || end_of_file == BUFF_SIZE)
 	{
 		buff[ret] = '\0';
-		if (!validate_lines(buff, pst_ptr) || !validate_shape(position) || \
-			!create_structure(&head, position, lstlen))
+		if (!validate_lines(buff, position) || !validate_shape(position)
+			|| !create_structure(&head, position, lstlen))
 		{
 			delete_structure(&head);
 			return (NULL);

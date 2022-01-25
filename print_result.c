@@ -6,27 +6,37 @@
 /*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 14:43:19 by mbeeler           #+#    #+#             */
-/*   Updated: 2022/01/18 22:42:31 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/01/23 19:31:19 by manuelbeele      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void	print_result(char *result)
+void	print_result(t_list *head, int sqr)
 {
-	int	sqr;
-	int	len;
-	int	i;
+	int		i;
+	int		pos;
+	char	*result;
 
-	len = ft_strlen(result);
-	sqr = 0;
-	while (sqr * sqr < len)
-		sqr++;
+	result = ft_strnew(sqr * sqr);
+	ft_memset(result, '.', sqr * sqr);
+	while (head)
+	{
+		i = -1;
+		while (++i < EL_SIZE)
+		{
+			pos = head->cur_pos + head->position[i] % (EL_SIZE + 1)
+				+ sqr * (head->position[i] / (EL_SIZE + 1));
+			result[pos] = head->symbol;
+		}
+		head = head->next;
+	}
 	i = -1;
-	while (++i != len)
+	while (++i < sqr * sqr)
 	{
 		ft_putchar(result[i]);
 		if ((i + 1) % sqr == 0)
 			ft_putchar('\n');
 	}
+	ft_strdel(&result);
 }
