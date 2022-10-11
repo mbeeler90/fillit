@@ -6,12 +6,16 @@
 /*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 14:43:19 by mbeeler           #+#    #+#             */
-/*   Updated: 2022/01/23 19:31:19 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/10/11 15:50:19 by manuelbeele      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
+/*
+** Print the result by creating a string in the size of the result. Go through
+** the linked list and add the output to the sring in the right place.
+*/
 void	print_result(t_list *head, int sqr)
 {
 	int		i;

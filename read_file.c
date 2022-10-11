@@ -6,12 +6,16 @@
 /*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/01/22 15:42:47 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/10/11 15:33:14 by manuelbeele      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
+/*
+** The function checks that the file only consist of valid characters and
+** and that the formating is valid.
+*/
 static int	validate_lines(char *buff, int *pst_ptr)
 {
 	int	i;
@@ -58,6 +62,10 @@ static int	check_count(int *count)
 		return (0);
 }
 
+/*
+** The function checks on how many sides a piece is attached to another piece.
+** Each piece must be attached at least at one side to another piece.
+*/
 static int	validate_shape(int *position)
 {
 	int	i;
@@ -84,6 +92,10 @@ static int	validate_shape(int *position)
 	return (check_count(count));
 }
 
+/*
+** The function reads the file and calls functions to checks whether the
+** provided input is valid.
+*/
 t_list	*read_file(char **argv, int *lstlen, int end_of_file, int fd)
 {
 	int		ret;

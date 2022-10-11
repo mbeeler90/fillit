@@ -6,12 +6,16 @@
 /*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 14:43:19 by mbeeler           #+#    #+#             */
-/*   Updated: 2022/01/23 19:38:50 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/10/11 15:48:07 by manuelbeele      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
+/*
+** Go through all possible positions in a line to place the piece. If the piece
+** fits, place it. Otherwise, go to next line and repeat.
+*/
 static int	place_element(t_list *head, int sqr, unsigned short int *map)
 {
 	while (head->x + head->width < sqr)
@@ -30,6 +34,12 @@ static int	place_element(t_list *head, int sqr, unsigned short int *map)
 	return (0);
 }
 
+/*
+** Iterate through all pieces and try to place them. If the piece is placed, go
+** to the next piece and try to place it in a free spot. If the piece can not be
+** placed, go to the previous piece and move it to the next place. Repeat until
+** either a solution was found or no valid solution exists.
+*/
 static int	solve(t_list *head, unsigned short int *map, int sqr)
 {
 	int	solution;
@@ -57,6 +67,10 @@ static int	solve(t_list *head, unsigned short int *map, int sqr)
 	return (solution);
 }
 
+/*
+** Creation of a 16x16 map to place the pieces. Initial check of minimum
+** square size. Increase square size until a solution is found.
+*/
 int	solver(t_list *head, int min_size)
 {
 	unsigned short int	map[16];

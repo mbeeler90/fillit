@@ -6,12 +6,15 @@
 /*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 14:43:19 by mbeeler           #+#    #+#             */
-/*   Updated: 2022/01/23 19:36:21 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/10/11 15:39:50 by manuelbeele      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
+/*
+** Delete the linked list and free the allocated memory.
+*/
 void	delete_structure(t_list **head)
 {
 	t_list	*tmp;
@@ -36,6 +39,10 @@ void	delete_structure(t_list **head)
 	}
 }
 
+/*
+** Function to get the hight and width if a piece is placed in certain position
+** to check whether the piece fits in the square or not.
+*/
 static void	get_heigth_and_width(t_list *elem, int *position)
 {
 	int	min_x;
@@ -63,6 +70,10 @@ static void	get_heigth_and_width(t_list *elem, int *position)
 	}
 }
 
+/*
+** Each piece is decoded with a unique number to enable bitwise operations. 
+** This function assignes a number to each piece.
+*/
 static void	get_code(t_list *elem, int *position)
 {
 	int						i;
@@ -89,6 +100,9 @@ static void	get_code(t_list *elem, int *position)
 	}
 }
 
+/*
+** Function to add a new piece to the linked list.
+*/
 static t_list	*create_element(int *position, int *lstlen)
 {
 	t_list	*elem;
@@ -113,6 +127,10 @@ static t_list	*create_element(int *position, int *lstlen)
 	return (elem);
 }
 
+/*
+** Function to create a linked list with the pieces, which have to be placed
+** in a square.
+*/
 int	create_structure(t_list **head, int *position, int *lstlen)
 {
 	t_list	*tmp;
