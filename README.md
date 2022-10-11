@@ -13,4 +13,13 @@ Run make to compile an executable called fillit.
 
 ### Example:
 
-`./fillit eval_tests/test_8\n\n.AABBG\nAACCBG\nECC.BG\nEEEH.G\nFF.HHH\nFFDDDD`
+```
+./fillit eval_tests/test_8`
+.AABBG
+AACCBG
+ECC.BG
+EEEH.G
+FF.HHH
+FFDDDD
+```
+
