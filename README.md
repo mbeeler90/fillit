@@ -5,7 +5,7 @@ Fillit receives a file with tetriminos as input and finds the smallest possible 
 
 ## Compiling
 
-Run make to compile an executable called fillit.
+Run `make` to compile an executable called fillit.
 
 ## Usage
 
