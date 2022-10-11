@@ -14,7 +14,8 @@ Run make to compile an executable called fillit.
 ### Example:
 
 ```
-./fillit eval_tests/test_8`
+./fillit eval_tests/test_8
+
 .AABBG
 AACCBG
 ECC.BG
